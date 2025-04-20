@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0D0D0D; /* Dark background */
+  --foreground: #EAEAEA; /* Light foreground */
+  --accent-gold: #DAA520; /* Gold accent for Chinese theme */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background-color: var(--background); /* Set background color here */
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif; /* Consider adding a custom Chinese-style font */
+  position: relative; /* Needed for absolute positioning of pseudo-elements */
+  min-height: 100vh;
+}
+
+/* Dragon shadow background element */
+body::before {
+  content: "";
+  position: fixed; /* Covers the entire viewport */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/dragon-shadow.png'); /* <<< REPLACE with your image path in /public */
+  background-repeat: no-repeat;
+  background-position: center center; /* Center the image */
+  background-size: cover; /* Adjust as needed (e.g., 'contain', '80%') */
+  opacity: 0.08; /* Adjust for desired subtlety (0.05 to 0.2 is usually good) */
+  z-index: -1; /* Place it behind all other content */
+  pointer-events: none; /* Make sure it doesn't interfere with clicks */
+}
+
+/* Custom class for gold text */
+.text-gold {
+  color: var(--accent-gold);
+}
+
+/* Custom class for gold border */
+.border-gold {
+  border-color: var(--accent-gold);
+}
