@@ -71,7 +71,7 @@ export default function Home() {
           </p>
           
           <div className="flex flex-col md:flex-row gap-4 justify-center">
-            <button className="bg-gold hover:bg-amber-400 text-black px-8 py-3 rounded-full font-medium text-lg transition-all hover:scale-105">
+            <button className="bg-amber-400 hover:bg-amber-400 text-black px-8 py-3 rounded-full font-medium text-lg transition-all hover:scale-105">
               开始冒险
             </button>
             <button className="border border-gold/50 text-gold hover:bg-gold/10 px-8 py-3 rounded-full font-medium text-lg transition-all">
