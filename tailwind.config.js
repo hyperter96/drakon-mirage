@@ -20,7 +20,7 @@ module.exports = {
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',
-        'shimmer': 'shimmer 4s linear infinite',
+        'shimmer': 'shimmer 4.5s linear infinite',
         'pulse-slow': 'pulse 8s ease-in-out infinite',
         'bounce-sm': 'bounce-sm 1s ease-in-out infinite',
       },

@@ -74,7 +74,7 @@ export default function Home() {
             <button className="bg-amber-400 hover:bg-amber-400 text-black px-8 py-3 rounded-full font-medium text-lg transition-all hover:scale-105">
               开始冒险
             </button>
-            <button className="border border-gold/50 text-gold hover:bg-gold/10 px-8 py-3 rounded-full font-medium text-lg transition-all">
+            <button className="border border-gold/50 text-gold hover:bg-gold/10 px-8 py-3 rounded-full font-medium text-lg transition-all hover:scale-105">
               观看预告片
             </button>
           </div>
@@ -141,7 +141,7 @@ export default function Home() {
             <p className="text-gray-300 mb-6">下载应用，开启你的寻宝之旅</p>
             
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <button className="flex items-center justify-center bg-black border border-gold/50 px-6 py-3 rounded-xl hover:bg-gold/10 transition-all">
+              <button className="flex items-center justify-center bg-black border border-gold/50 px-6 py-3 rounded-xl hover:bg-gold/10 transition-all hover:scale-105">
                 <Image
                   src="/apple-icon.svg" // 使用我们创建的SVG
                   alt="App Store"
@@ -152,7 +152,7 @@ export default function Home() {
                 <span>App Store</span>
               </button>
               
-              <button className="flex items-center justify-center bg-black border border-gold/50 px-6 py-3 rounded-xl hover:bg-gold/10 transition-all">
+              <button className="flex items-center justify-center bg-black border border-gold/50 px-6 py-3 rounded-xl hover:bg-gold/10 transition-all hover:scale-105">
                 <Image
                   src="/google-play-icon.svg" // 使用我们创建的SVG
                   alt="Google Play"
@@ -177,7 +177,7 @@ export default function Home() {
               width={30}
               height={30}
             />
-            <span className="text-gold text-sm">© 2023 龙影幻境 版权所有</span>
+            <span className="text-gold text-sm">© 2025 龙影幻境 版权所有</span>
           </div>
           
           <div className="flex space-x-6">
