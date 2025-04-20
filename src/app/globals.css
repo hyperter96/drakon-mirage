@@ -4,6 +4,10 @@
   --background: #0D0D0D; /* Dark background */
   --foreground: #EAEAEA; /* Light foreground */
   --accent-gold: #DAA520; /* Gold accent for Chinese theme */
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
+  --gold: #DAA520;
 }
 
 @theme inline {
@@ -19,6 +23,13 @@ body {
   font-family: Arial, Helvetica, sans-serif; /* Consider adding a custom Chinese-style font */
   position: relative; /* Needed for absolute positioning of pseudo-elements */
   min-height: 100vh;
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
 }
 
 /* Dragon shadow background element */
@@ -46,4 +57,23 @@ body::before {
 /* Custom class for gold border */
 .border-gold {
   border-color: var(--accent-gold);
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 3s linear infinite;
+  background-size: 200% 100%;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }

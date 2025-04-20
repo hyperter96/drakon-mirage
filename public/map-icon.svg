@@ -1,0 +1,7 @@
+<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+  <rect width="40" height="40" rx="8" fill="#000" opacity="0.5"/>
+  <path fill="#DAA520" d="M32 10H8c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h24c1.1 0 2-.9 2-2V12c0-1.1-.9-2-2-2zm0 18H8V12h24v16z"/>
+  <path fill="#DAA520" d="M14 14v12l4-2 4 2 4-2v-12l-4 2-4-2-4 2z"/>
+  <circle cx="20" cy="20" r="2" fill="#DAA520"/>
+  <path fill="#DAA520" d="M20 14c-3.3 0-6 2.7-6 6 0 4.5 6 10 6 10s6-5.5 6-10c0-3.3-2.7-6-6-6zm0 8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+</svg> 

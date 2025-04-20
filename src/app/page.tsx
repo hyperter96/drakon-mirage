@@ -2,95 +2,211 @@ import Image from 'next/image';
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-background text-foreground">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-700 bg-gradient-to-b from-zinc-800 pb-6 pt-8 backdrop-blur-2xl lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-gray-800 lg:p-4">
-          AR寻宝：龙影幻境
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-black via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg" // Placeholder Logo
-              alt="Vercel Logo"
-              width={100}
-              height={24}
-              priority
+    <main className="min-h-screen flex flex-col bg-gradient-to-b from-gray-900 to-black text-foreground relative overflow-hidden">
+      {/* 龙影背景元素 */}
+      <div className="absolute inset-0 z-0 opacity-20">
+        <Image
+          src="/dragon-bg.svg" // 使用我们创建的SVG
+          alt="Dragon Background"
+          fill
+          className="object-cover"
+          priority
+        />
+      </div>
+      
+      {/* 浮动的宝藏元素 */}
+      <div className="absolute top-1/4 right-10 animate-float hidden lg:block">
+        <Image
+          src="/treasure.svg" // 使用我们创建的SVG
+          alt="Floating Treasure"
+          width={120}
+          height={120}
+        />
+      </div>
+      
+      <div className="absolute bottom-1/4 left-10 animate-pulse hidden lg:block">
+        <Image
+          src="/dragon-symbol.svg" // 使用我们创建的SVG
+          alt="Dragon Symbol"
+          width={150}
+          height={150}
+        />
+      </div>
+
+      {/* 导航栏 */}
+      <nav className="w-full px-8 py-4 backdrop-blur-md bg-black/50 border-b border-gold/30 z-50 sticky top-0">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <Image 
+              src="/logo.svg" // 使用我们创建的SVG
+              alt="龙影幻境"
+              width={40}
+              height={40}
             />
-          </a>
+            <span className="text-gold text-xl font-bold">龙影幻境</span>
+          </div>
+          
+          <div className="hidden md:flex space-x-8 text-sm">
+            <a href="#" className="text-gray-300 hover:text-gold transition-colors">首页</a>
+            <a href="#" className="text-gray-300 hover:text-gold transition-colors">游戏介绍</a>
+            <a href="#" className="text-gray-300 hover:text-gold transition-colors">寻宝攻略</a>
+            <a href="#" className="text-gray-300 hover:text-gold transition-colors">宝藏图鉴</a>
+            <a href="#" className="text-gray-300 hover:text-gold transition-colors">社区</a>
+          </div>
+          
+          <button className="bg-gold/80 hover:bg-gold text-black px-4 py-2 rounded-full text-sm font-medium transition-all hover:scale-105">
+            立即下载
+          </button>
+        </div>
+      </nav>
+
+      {/* 主要内容 */}
+      <div className="flex-1 flex flex-col items-center z-10 px-6">
+        <div className="mt-16 md:mt-28 text-center max-w-3xl">
+          <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-gold via-amber-300 to-gold animate-shimmer">
+            龙影幻境
+          </h1>
+          <p className="text-xl md:text-2xl text-gray-300 mb-10">
+            扫描现实，解锁神秘，寻找失落的龙族宝藏
+          </p>
+          
+          <div className="flex flex-col md:flex-row gap-4 justify-center">
+            <button className="bg-gold hover:bg-amber-400 text-black px-8 py-3 rounded-full font-medium text-lg transition-all hover:scale-105">
+              开始冒险
+            </button>
+            <button className="border border-gold/50 text-gold hover:bg-gold/10 px-8 py-3 rounded-full font-medium text-lg transition-all">
+              观看预告片
+            </button>
+          </div>
+        </div>
+
+        {/* 特色卡片 */}
+        <div className="w-full max-w-6xl mt-20 md:mt-32 grid grid-cols-1 md:grid-cols-3 gap-6 z-10">
+          <div className="bg-gray-900/60 backdrop-blur-sm border border-gold/20 rounded-xl p-6 hover:border-gold/50 transition-all hover:transform hover:-translate-y-2 group">
+            <div className="bg-black/50 p-3 rounded-lg inline-block mb-4">
+              <Image
+                src="/ar-icon.svg" // 使用我们创建的SVG
+                alt="AR Feature"
+                width={40}
+                height={40}
+              />
+            </div>
+            <h2 className="text-2xl font-semibold text-gold mb-3 group-hover:text-amber-300">
+              AR寻宝体验
+            </h2>
+            <p className="text-gray-300">
+              通过增强现实技术，在真实世界中寻找虚拟宝藏，解开古老谜题。
+            </p>
+          </div>
+          
+          <div className="bg-gray-900/60 backdrop-blur-sm border border-gold/20 rounded-xl p-6 hover:border-gold/50 transition-all hover:transform hover:-translate-y-2 group">
+            <div className="bg-black/50 p-3 rounded-lg inline-block mb-4">
+              <Image
+                src="/map-icon.svg" // 使用我们创建的SVG
+                alt="Map Feature"
+                width={40}
+                height={40}
+              />
+            </div>
+            <h2 className="text-2xl font-semibold text-gold mb-3 group-hover:text-amber-300">
+              龙族秘境
+            </h2>
+            <p className="text-gray-300">
+              探索充满东方神秘色彩的龙族领地，发现隐藏在城市各处的龙影踪迹。
+            </p>
+          </div>
+          
+          <div className="bg-gray-900/60 backdrop-blur-sm border border-gold/20 rounded-xl p-6 hover:border-gold/50 transition-all hover:transform hover:-translate-y-2 group">
+            <div className="bg-black/50 p-3 rounded-lg inline-block mb-4">
+              <Image
+                src="/community-icon.svg" // 使用我们创建的SVG
+                alt="Community Feature"
+                width={40}
+                height={40}
+              />
+            </div>
+            <h2 className="text-2xl font-semibold text-gold mb-3 group-hover:text-amber-300">
+              寻宝者联盟
+            </h2>
+            <p className="text-gray-300">
+              加入全球寻宝者社区，组队挑战，分享发现，共同揭开龙族文明的秘密。
+            </p>
+          </div>
+        </div>
+        
+        {/* 下载区域 */}
+        <div className="w-full max-w-4xl my-20 bg-gradient-to-r from-black/70 via-gray-900/70 to-black/70 backdrop-blur-md rounded-2xl p-8 border border-gold/30">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold text-gold mb-2">立即加入冒险</h2>
+            <p className="text-gray-300 mb-6">下载应用，开启你的寻宝之旅</p>
+            
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <button className="flex items-center justify-center bg-black border border-gold/50 px-6 py-3 rounded-xl hover:bg-gold/10 transition-all">
+                <Image
+                  src="/apple-icon.svg" // 使用我们创建的SVG
+                  alt="App Store"
+                  width={24}
+                  height={24}
+                  className="mr-2"
+                />
+                <span>App Store</span>
+              </button>
+              
+              <button className="flex items-center justify-center bg-black border border-gold/50 px-6 py-3 rounded-xl hover:bg-gold/10 transition-all">
+                <Image
+                  src="/google-play-icon.svg" // 使用我们创建的SVG
+                  alt="Google Play"
+                  width={24}
+                  height={24}
+                  className="mr-2"
+                />
+                <span>Google Play</span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-900 after:via-[#DAA520] after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-900 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#DAA520] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        {/* Placeholder for a central cool graphic/logo - maybe a stylized dragon or artifact */}
-        <h1 className="text-4xl font-bold text-gold animate-pulse lg:text-6xl">
-          龙影幻境
-        </h1>
-        {/* You could potentially use an Image component here with a dragon SVG or similar */}
-        {/* <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg" // Replace with your cool logo/image
-          alt="Game Logo"
-          width={180}
-          height={37}
-          priority
-        /> */}
-      </div>
-
-      <div className="mb-32 mt-16 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-3 lg:text-left">
-        <a
-          href="#" // Link to features section or page
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gold hover:bg-gray-800/30"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold text-gold">
-            特色玩法{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-70">
-            探索融合现实的古老幻境，寻找隐藏的龙影宝藏。
-          </p>
-        </a>
-
-        <a
-          href="#" // Link to how-to-play section or page
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gold hover:bg-gray-800/30"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold text-gold">
-            如何开始{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-70">
-            下载应用，开启摄像头，步入充满神秘的AR世界。
-          </p>
-        </a>
-
-        <a
-          href="#" // Link to download/community section
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gold hover:bg-gray-800/30"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold text-gold">
-            立即下载{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-70">
-            加入寻宝者行列，揭开龙影幻境的古老秘密。
-          </p>
-        </a>
-      </div>
+      
+      {/* 页脚 */}
+      <footer className="w-full bg-black/80 backdrop-blur-md border-t border-gold/20 py-6 px-8 z-10">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
+          <div className="flex items-center space-x-2 mb-4 md:mb-0">
+            <Image 
+              src="/logo.svg" // 使用我们创建的SVG
+              alt="龙影幻境"
+              width={30}
+              height={30}
+            />
+            <span className="text-gold text-sm">© 2023 龙影幻境 版权所有</span>
+          </div>
+          
+          <div className="flex space-x-6">
+            <a href="#" className="text-gray-400 hover:text-gold text-sm">关于我们</a>
+            <a href="#" className="text-gray-400 hover:text-gold text-sm">隐私政策</a>
+            <a href="#" className="text-gray-400 hover:text-gold text-sm">用户协议</a>
+            <a href="#" className="text-gray-400 hover:text-gold text-sm">联系我们</a>
+          </div>
+        </div>
+      </footer>
+      
+      {/* 添加一些动画粒子效果 */}
+      <div className="particle-container absolute inset-0 z-0"></div>
     </main>
   );
 }
+
+// 需要在全局CSS中添加以下动画类
+// .animate-float {
+//   animation: float 6s ease-in-out infinite;
+// }
+// .animate-shimmer {
+//   animation: shimmer 3s linear infinite;
+// }
+// @keyframes float {
+//   0%, 100% { transform: translateY(0); }
+//   50% { transform: translateY(-20px); }
+// }
+// @keyframes shimmer {
+//   0% { background-position: 100% 50%; }
+//   100% { background-position: 0% 50%; }
+// }

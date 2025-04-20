@@ -1,0 +1,10 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <g fill="#DAA520">
+    <path d="M90 40H30c-2.2 0-4 1.8-4 4v40c0 2.2 1.8 4 4 4h60c2.2 0 4-1.8 4-4V44c0-2.2-1.8-4-4-4z" opacity="0.8"/>
+    <path d="M94 50H26c-1.1 0-2-.9-2-2v-8c0-1.1.9-2 2-2h68c1.1 0 2 .9 2 2v8c0 1.1-.9 2-2 2z"/>
+    <circle cx="60" cy="60" r="10" fill="#fff" opacity="0.6"/>
+    <path d="M62 30v-8M58 30v-8M50 84l-10 10M70 84l10 10" stroke="#DAA520" stroke-width="2" fill="none"/>
+    <path d="M45 50c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zM75 50c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5z" fill="#B8860B"/>
+    <path d="M60 75c8.3 0 15-6.7 15-15H45c0 8.3 6.7 15 15 15z" fill="#B8860B"/>
+  </g>
+</svg> 
