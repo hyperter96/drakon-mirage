@@ -40,7 +40,7 @@ body::before {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url('/dragon-shadow.png'); /* <<< REPLACE with your image path in /public */
+  background-image: url('/dragon-shadow.svg'); /* <<< REPLACE with your image path in /public */
   background-repeat: no-repeat;
   background-position: center center; /* Center the image */
   background-size: cover; /* Adjust as needed (e.g., 'contain', '80%') */
