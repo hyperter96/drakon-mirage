@@ -14,7 +14,8 @@ interface ClientLayoutProps {
 }
 
 export default function ClientLayout({ children }: ClientLayoutProps) {
-  const [cookieAccepted, setCookieAccepted] = useState(false);
+  // 使用前缀下划线表示有意未使用的状态变量
+  const [_cookieAccepted, setCookieAccepted] = useState(false);
 
   const handleCookieAccept = () => {
     setCookieAccepted(true);
