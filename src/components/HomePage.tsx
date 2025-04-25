@@ -8,8 +8,11 @@ import type { Locale } from '../i18n/LanguageContext';
 export default function HomePage({ lang }: { lang: Locale }) {
   const { t } = useTranslation();
   
+  // 使用lang参数进行本地化定制
+  const localizedBackground = lang === 'zh' ? 'bg-gradient-to-b from-gray-900 to-black' : 'bg-gradient-to-b from-gray-900 to-gray-950';
+  
   return (
-    <main className="min-h-screen flex flex-col bg-gradient-to-b from-gray-900 to-black text-foreground relative overflow-hidden">
+    <main className={`min-h-screen flex flex-col ${localizedBackground} text-foreground relative overflow-hidden`}>
       {/* 龙影背景元素 */}
       <div className="absolute inset-0 z-0 opacity-50">
         <Image

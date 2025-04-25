@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
+import type { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import zhTranslations from './locales/zh.json';
 import enTranslations from './locales/en.json';
 import { redirectedPathName, locales } from './utils';
@@ -25,6 +26,12 @@ const translations: Record<Locale, Translations> = {
   'zh': zhTranslations,
   'en': enTranslations
 };
+
+// 定义路由push方法的安全包装
+function safeRouterPush(router: AppRouterInstance, path: string): void {
+  // Next.js 15版本的router.push需要特定类型，这里做安全转换
+  router.push(path as unknown as Parameters<AppRouterInstance['push']>[0]);
+}
 
 // 创建上下文
 const LanguageContext = createContext<LanguageContextType>({
@@ -52,7 +59,8 @@ export function LanguageProvider({
       if (savedLocale && locales.includes(savedLocale)) {
         if (savedLocale !== initialLocale) {
           // 如果保存的语言与URL中的语言不同，更新URL
-          router.push(redirectedPathName(savedLocale, pathname));
+          const newPath = redirectedPathName(savedLocale, pathname);
+          safeRouterPush(router, newPath);
         }
         setLocale(savedLocale);
       } else {
@@ -84,7 +92,8 @@ export function LanguageProvider({
       document.cookie = `locale=${newLocale}; path=/; max-age=31536000; SameSite=Lax`;
       
       // 重定向到新语言的URL
-      router.push(redirectedPathName(newLocale, pathname));
+      const newPath = redirectedPathName(newLocale, pathname);
+      safeRouterPush(router, newPath);
     } catch (e) {
       console.warn('Error setting language:', e);
     }
@@ -118,17 +127,17 @@ export function useTranslation() {
   
   const t = (key: string) => {
     const keys = key.split('.');
-    let value: any = translations;
+    let value: Record<string, unknown> = translations;
     
     for (const k of keys) {
       if (value[k] === undefined) {
         console.warn(`Translation key not found: ${key}`);
         return key;
       }
-      value = value[k];
+      value = value[k] as Record<string, unknown>;
     }
     
-    return value;
+    return value as unknown as string;
   };
   
   return { t };

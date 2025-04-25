@@ -7,18 +7,15 @@ interface PageProps {
   };
 }
 
-// 从路由props中提取有效的语言代码 - 改为异步函数
+// 从路由props中提取有效的语言代码
 export async function getLocaleFromRouteProps(props: PageProps): Promise<Locale> {
   // 确保有props和params对象
   if (!props || !props.params) {
     return 'zh';
   }
   
-  // 先解构params，然后等待it
-  const params = await props.params;
-  
-  // 使用空值合并，安全地访问语言参数
-  const langParam = params.lang ?? '';
+  // 直接使用params，不需要await，因为它不是Promise
+  const { lang: langParam = '' } = props.params;
   
   // 验证语言参数是否有效
   return (langParam && locales.includes(langParam as Locale))

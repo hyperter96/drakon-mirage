@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import type { Locale } from '../i18n/LanguageContext';
+import type { Translations } from '../i18n/LanguageContext';
 import zhTranslations from '../i18n/locales/zh.json';
 import enTranslations from '../i18n/locales/en.json';
 
@@ -15,7 +16,7 @@ interface CookieSettingsProps {
 
 // 创建一个根据语言获取翻译的辅助函数
 function getTranslation(lang: Locale) {
-  const translations = {
+  const translations: Record<Locale, Translations> = {
     'zh': zhTranslations,
     'en': enTranslations
   };
@@ -23,17 +24,17 @@ function getTranslation(lang: Locale) {
   return {
     t: (key: string) => {
       const keys = key.split('.');
-      let value: any = translations[lang];
+      let value: Record<string, unknown> = translations[lang];
       
       for (const k of keys) {
         if (value[k] === undefined) {
           console.warn(`Translation key not found: ${key}`);
           return key;
         }
-        value = value[k];
+        value = value[k] as Record<string, unknown>;
       }
       
-      return value;
+      return value as unknown as string;
     }
   };
 }

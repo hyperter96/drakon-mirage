@@ -66,16 +66,14 @@ export default async function RootLayout(props: {
   const lang = await getLocaleFromRouteProps(props);
 
   return (
-    <html lang={lang}>
+    <html lang={lang} className={`${geistSans.variable} ${geistMono.variable}`}>
       <head>
         <link rel="icon" href="/logo_32x32.png" sizes="32x32" />
         <link rel="icon" href="/logo_108x108.png" sizes="108x108" />
         <link rel="icon" href="/dragon-symbol.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/logo_108x108.png" />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className="antialiased">
         <ClientLayout lang={lang}>
           {props.children}
         </ClientLayout>

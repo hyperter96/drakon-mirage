@@ -3,8 +3,11 @@
 import { useState, useEffect, useCallback } from "react";
 import dynamic from "next/dynamic";
 import Script from "next/script";
-import { LanguageProvider, useTranslation } from "../i18n/LanguageContext";
+import { LanguageProvider } from "../i18n/LanguageContext";
 import type { Locale } from "../i18n/LanguageContext";
+import type { Translations } from "../i18n/LanguageContext";
+import zhTranslations from '../i18n/locales/zh.json';
+import enTranslations from '../i18n/locales/en.json';
 
 // 动态导入CookieConsent组件，避免SSR时的localStorage错误
 const CookieConsent = dynamic(
@@ -127,24 +130,24 @@ export default function ClientLayout({ children, lang }: ClientLayoutProps) {
 function CookieSettingsButton({ openSettings, lang }: { openSettings: () => void; lang: Locale }) {
   // 获取翻译，使用同样的辅助函数
   const getTranslation = (locale: Locale) => {
-    const translations = {
-      'zh': require('../i18n/locales/zh.json'),
-      'en': require('../i18n/locales/en.json')
+    const translations: Record<Locale, Translations> = {
+      'zh': zhTranslations,
+      'en': enTranslations
     };
     
     return {
       t: (key: string) => {
         const keys = key.split('.');
-        let value: any = translations[locale];
+        let value: Record<string, unknown> = translations[locale];
         
         for (const k of keys) {
           if (value[k] === undefined) {
             return key;
           }
-          value = value[k];
+          value = value[k] as Record<string, unknown>;
         }
         
-        return value;
+        return value as unknown as string;
       }
     };
   };

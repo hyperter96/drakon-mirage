@@ -39,3 +39,16 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Vercel部署相关
+.vercel
+.env*.local
+.env.production
+
+# 构建输出
+.turbo
+dist/
+build/
+
+# ESLint缓存
+.eslintcache
