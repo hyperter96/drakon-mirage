@@ -1,0 +1,78 @@
+{
+  "site": {
+    "title": "Dragon Mirage - Immersive Adventure World",
+    "description": "Explore Dragon Mirage, an immersive world full of magic and adventure"
+  },
+  "nav": {
+    "home": "Home",
+    "gameIntro": "Game Introduction",
+    "treasureGuide": "Treasure Guide",
+    "treasureGallery": "Treasure Gallery",
+    "community": "Community"
+  },
+  "buttons": {
+    "download": "Download Now",
+    "startAdventure": "Start Adventure",
+    "watchTrailer": "Watch Trailer"
+  },
+  "hero": {
+    "subtitle": "Scan reality, unlock mysteries, find lost dragon treasures"
+  },
+  "features": {
+    "arTreasure": {
+      "title": "AR Treasure Hunt",
+      "description": "Use augmented reality technology to find virtual treasures in the real world and solve ancient puzzles."
+    },
+    "dragonRealm": {
+      "title": "Dragon Realm",
+      "description": "Explore dragon territories filled with oriental mystique and discover dragon traces hidden throughout the city."
+    },
+    "treasureLeague": {
+      "title": "Treasure Hunters League",
+      "description": "Join the global treasure hunter community, team up for challenges, share discoveries, and unveil the secrets of dragon civilization together."
+    }
+  },
+  "download": {
+    "title": "Join the Adventure Now",
+    "subtitle": "Download the app and begin your treasure hunting journey"
+  },
+  "footer": {
+    "copyright": "© 2025 Dragon Mirage All Rights Reserved",
+    "about": "About Us",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "contact": "Contact Us"
+  },
+  "cookies": {
+    "settings": "Cookie Settings",
+    "notification": {
+      "title": "🍪 Cookie Notice",
+      "description": "We use cookies to enhance your browsing experience, analyze site traffic, and personalize content. By continuing to browse, you consent to our cookie policy.",
+      "accept": "Accept All",
+      "decline": "Decline",
+      "settings": "Settings"
+    },
+    "modal": {
+      "title": "Cookie Settings",
+      "close": "Close",
+      "description": "You can choose to enable or disable different types of cookies. Necessary cookies are required for the website's basic functionality and cannot be disabled.",
+      "necessary": {
+        "title": "Necessary",
+        "description": "These cookies are essential for the website to function properly and cannot be disabled",
+        "required": "Required"
+      },
+      "analytics": {
+        "title": "Analytics",
+        "description": "Help us understand how users interact with the website to improve user experience"
+      },
+      "preferences": {
+        "title": "Preferences",
+        "description": "Allow the website to remember your preferences and settings"
+      },
+      "saveSettings": "Save Settings",
+      "acceptAll": "Accept All",
+      "declineAll": "Decline All",
+      "saveSuccess": "Settings Saved"
+    }
+  }
+} 

@@ -3,6 +3,8 @@
 import { useState, useEffect, useCallback } from "react";
 import dynamic from "next/dynamic";
 import Script from "next/script";
+import { LanguageProvider, useTranslation } from "../i18n/LanguageContext";
+import type { Locale } from "../i18n/LanguageContext";
 
 // 动态导入CookieConsent组件，避免SSR时的localStorage错误
 const CookieConsent = dynamic(
@@ -18,32 +20,45 @@ const CookieSettings = dynamic(
 
 interface ClientLayoutProps {
   children: React.ReactNode;
+  lang: Locale;
 }
 
-export default function ClientLayout({ children }: ClientLayoutProps) {
+export default function ClientLayout({ children, lang }: ClientLayoutProps) {
   const [cookieAccepted, setCookieAccepted] = useState<boolean | null>(null);
   const [showSettings, setShowSettings] = useState(false);
 
   // 初始化时检查cookie设置
   useEffect(() => {
-    const savedConsent = localStorage.getItem('cookieConsent');
-    if (savedConsent) {
-      setCookieAccepted(savedConsent === 'true');
+    try {
+      const savedConsent = localStorage.getItem('cookieConsent');
+      if (savedConsent) {
+        setCookieAccepted(savedConsent === 'true');
+      }
+    } catch (e) {
+      console.warn('localStorage not available:', e);
     }
   }, []);
 
   // 处理接受cookies
   const handleCookieAccept = useCallback(() => {
-    localStorage.setItem('cookieConsent', 'true');
-    setCookieAccepted(true);
-    console.log("Cookies accepted");
+    try {
+      localStorage.setItem('cookieConsent', 'true');
+      setCookieAccepted(true);
+      console.log("Cookies accepted");
+    } catch (e) {
+      console.warn('localStorage not available:', e);
+    }
   }, []);
 
   // 处理拒绝cookies
   const handleCookieDecline = useCallback(() => {
-    localStorage.setItem('cookieConsent', 'false');
-    setCookieAccepted(false);
-    console.log("Cookies declined");
+    try {
+      localStorage.setItem('cookieConsent', 'false');
+      setCookieAccepted(false);
+      console.log("Cookies declined");
+    } catch (e) {
+      console.warn('localStorage not available:', e);
+    }
   }, []);
 
   // 打开cookie设置面板
@@ -57,7 +72,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
   }, []);
 
   return (
-    <>
+    <LanguageProvider initialLocale={lang}>
       {children}
 
       {/* cookie相关UI组件 */}
@@ -66,6 +81,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
           onAccept={handleCookieAccept} 
           onDecline={handleCookieDecline}
           onSettings={openCookieSettings}
+          lang={lang}
         />
       )}
 
@@ -75,18 +91,16 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
           onAccept={handleCookieAccept}
           onDecline={handleCookieDecline}
           onClose={closeCookieSettings}
+          lang={lang}
         />
       )}
 
       {/* 悬浮的小按钮，允许用户随时更改cookie设置 */}
       {cookieAccepted !== null && !showSettings && (
-        <button 
-          onClick={openCookieSettings}
-          className="fixed bottom-4 right-4 bg-zinc-800/70 backdrop-blur-md text-white p-2 rounded-full text-xs shadow-lg hover:bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-gray-400"
-          aria-label="Cookie设置"
-        >
-          🍪
-        </button>
+        <CookieSettingsButton 
+          openSettings={openCookieSettings}
+          lang={lang}
+        />
       )}
 
       {/* 分析脚本 - 仅当用户接受cookies时加载 */}
@@ -105,6 +119,45 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
           </Script>
         </>
       )}
-    </>
+    </LanguageProvider>
+  );
+}
+
+// 设置按钮组件
+function CookieSettingsButton({ openSettings, lang }: { openSettings: () => void; lang: Locale }) {
+  // 获取翻译，使用同样的辅助函数
+  const getTranslation = (locale: Locale) => {
+    const translations = {
+      'zh': require('../i18n/locales/zh.json'),
+      'en': require('../i18n/locales/en.json')
+    };
+    
+    return {
+      t: (key: string) => {
+        const keys = key.split('.');
+        let value: any = translations[locale];
+        
+        for (const k of keys) {
+          if (value[k] === undefined) {
+            return key;
+          }
+          value = value[k];
+        }
+        
+        return value;
+      }
+    };
+  };
+  
+  const { t } = getTranslation(lang);
+  
+  return (
+    <button 
+      onClick={openSettings}
+      className="fixed bottom-4 right-4 bg-zinc-800/70 backdrop-blur-md text-white p-2 rounded-full text-xs shadow-lg hover:bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-gray-400"
+      aria-label={t('cookies.settings')}
+    >
+      🍪
+    </button>
   );
 } 

@@ -1,14 +1,44 @@
 "use client";
 
 import { useState, useEffect } from 'react';
+import type { Locale } from '../i18n/LanguageContext';
+import zhTranslations from '../i18n/locales/zh.json';
+import enTranslations from '../i18n/locales/en.json';
 
 interface CookieConsentProps {
   onAccept: () => void;
   onDecline?: () => void;
   onSettings?: () => void;
+  lang: Locale;
 }
 
-export default function CookieConsent({ onAccept, onDecline, onSettings }: CookieConsentProps) {
+// 创建一个根据语言获取翻译的辅助函数
+function getTranslation(lang: Locale) {
+  const translations = {
+    'zh': zhTranslations,
+    'en': enTranslations
+  };
+  
+  return {
+    t: (key: string) => {
+      const keys = key.split('.');
+      let value: any = translations[lang];
+      
+      for (const k of keys) {
+        if (value[k] === undefined) {
+          console.warn(`Translation key not found: ${key}`);
+          return key;
+        }
+        value = value[k];
+      }
+      
+      return value;
+    }
+  };
+}
+
+export default function CookieConsent({ onAccept, onDecline, onSettings, lang }: CookieConsentProps) {
+  const { t } = getTranslation(lang);
   const [isVisible, setIsVisible] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -62,10 +92,9 @@ export default function CookieConsent({ onAccept, onDecline, onSettings }: Cooki
     >
       <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row items-center justify-between">
         <div className="mb-4 md:mb-0 md:mr-4 max-w-2xl">
-          <h4 className="text-base font-medium mb-1 text-white">🍪 Cookie 使用提示</h4>
+          <h4 className="text-base font-medium mb-1 text-white">{t('cookies.notification.title')}</h4>
           <p className="text-sm text-gray-300">
-            我们使用cookie来提升您的浏览体验，分析网站流量并个性化内容。
-            继续浏览表示您同意我们的cookie政策。
+            {t('cookies.notification.description')}
           </p>
         </div>
         <div className="flex space-x-3">
@@ -73,19 +102,19 @@ export default function CookieConsent({ onAccept, onDecline, onSettings }: Cooki
             onClick={handleSettings}
             className="px-4 py-2 text-sm border border-gray-500 text-gray-200 rounded-md hover:bg-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-300"
           >
-            设置
+            {t('cookies.notification.settings')}
           </button>
           <button
             onClick={handleDecline}
             className="px-4 py-2 text-sm border border-gray-500 text-gray-200 rounded-md hover:bg-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-300"
           >
-            拒绝
+            {t('cookies.notification.decline')}
           </button>
           <button
             onClick={handleAccept}
             className="px-4 py-2 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            接受全部
+            {t('cookies.notification.accept')}
           </button>
         </div>
       </div>
