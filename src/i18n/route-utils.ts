@@ -14,11 +14,19 @@ export async function getLocaleFromRouteProps(props: PageProps): Promise<Locale>
     return 'zh';
   }
   
-  // 直接使用params，不需要await，因为它不是Promise
-  const { lang: langParam = '' } = props.params;
-  
-  // 验证语言参数是否有效
-  return (langParam && locales.includes(langParam as Locale))
-    ? langParam as Locale
-    : 'zh'; // 默认使用中文
+  try {
+    // 等待params对象解析完成
+    const params = await Promise.resolve(props.params);
+    
+    // 安全地访问语言参数
+    const langParam = params?.lang || '';
+    
+    // 验证语言参数是否有效
+    return (langParam && locales.includes(langParam as Locale))
+      ? langParam as Locale
+      : 'zh'; // 默认使用中文
+  } catch (error) {
+    console.error('Error resolving language parameter:', error);
+    return 'zh'; // 出错时使用默认语言
+  }
 } 
